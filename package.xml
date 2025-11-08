@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-model
+   href="http://download.ros.org/schema/package_format3.xsd"
+   schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>tf_republisher_rs</name>
+  <version>0.5.0</version>
+  <description>test</description>
+  <maintainer email="test@todo.com">Aaron</maintainer>
+  <license>GPL-3.0</license>
+
+  <build_depend>rclrs</build_depend>
+  <build_depend>rosidl_runtime_rs</build_depend>
+  <build_depend>example_interfaces</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>tf2_msgs</build_depend>
+
+  <exec_depend>rclrs</exec_depend>
+  <exec_depend>rosidl_runtime_rs</exec_depend>
+  <exec_depend>example_interfaces</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <export>
+    <build_type>ament_cargo</build_type>
+  </export>
+</package>

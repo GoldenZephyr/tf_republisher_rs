@@ -1,0 +1,12 @@
+---
+remaps:
+
+    - old_parent: "World"
+      old_child: "base_link"
+      new_parent: "hilbert/odom"
+      new_child: "hilbert/body"
+
+    - old_parent: "base_link"
+      old_child: "robocam"
+      new_parent: "hilbert/body"
+      new_child: "hilbert/robocam"

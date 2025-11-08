@@ -1,0 +1,26 @@
+[package]
+name = "tf_republisher_rs"
+version = "0.5.0"
+authors = ["Aaron Ray"]
+edition = "2021"
+
+[[bin]]
+name = "tf_republisher_node"
+path = "src/tf_republisher_node.rs"
+
+[dependencies]
+anyhow = {version = "1", features = ["backtrace"]}
+rclrs = "0.6"
+rosidl_runtime_rs = "0.5"
+example_interfaces = "*"
+geometry_msgs = "*"
+std_msgs = "*"
+tf2_msgs = "*"
+serde = {version = "1.0", features = ["derive"]}
+serde_yaml = "*"
+
+# This specific version is compatible with Rust 1.75
+backtrace = "=0.3.74"
+
+[package.metadata.ros]
+install_to_share = ["launch", "config"]
