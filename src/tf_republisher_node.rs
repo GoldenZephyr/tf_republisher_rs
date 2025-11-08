@@ -47,31 +47,25 @@ fn main() -> Result<(), Error> {
             (r.new_parent.as_str(), r.new_child.as_str()),
         );
     });
+    let remaps = Arc::new(remaps);
 
-    let remaps1 = remaps.clone();
-
-    let worker = node.create_worker::<usize>(0);
-
-    let _subscription = worker.create_subscription::<TFMessage, _>(
-        "/tf",
+    let remap_fn = |p: Publisher<TFMessage>| {
+        let rmpc = Arc::clone(&remaps);
         move |msg: tf2_msgs::msg::TFMessage| {
             let mut new_msg = TFMessage::default();
-            remap_transforms(&remaps, &msg.transforms, &mut new_msg.transforms);
+            remap_transforms(&rmpc, &msg.transforms, &mut new_msg.transforms);
             if new_msg.transforms.len() > 0 {
-                let _ = publisher.publish(&new_msg);
+                let _ = p.publish(&new_msg);
             }
-        },
-    )?;
+        }
+    };
+
+    let worker = node.create_worker::<usize>(0);
+    let _subscription = worker.create_subscription::<TFMessage, _>("/tf", remap_fn(publisher))?;
 
     let _static_subscription = worker.create_subscription::<TFMessage, _>(
         "/tf_static".transient_local(),
-        move |msg: tf2_msgs::msg::TFMessage| {
-            let mut new_msg = TFMessage::default();
-            remap_transforms(&remaps1, &msg.transforms, &mut new_msg.transforms);
-            if new_msg.transforms.len() > 0 {
-                let _ = static_publisher.publish(&new_msg);
-            }
-        },
+        remap_fn(static_publisher),
     )?;
 
     println!("Waiting for messages...");
