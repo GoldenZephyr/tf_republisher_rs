@@ -8,16 +8,22 @@ edition = "2021"
 name = "tf_republisher_node"
 path = "src/tf_republisher_node.rs"
 
+[[bin]]
+name = "tf_reshaper_node"
+path = "src/tf_reshaper_node.rs"
+
 [dependencies]
 anyhow = {version = "1", features = ["backtrace"]}
-rclrs = "0.6"
-rosidl_runtime_rs = "0.5"
+rclrs = "0.7"
+rosidl_runtime_rs = "0.6"
 example_interfaces = "*"
 geometry_msgs = "*"
 std_msgs = "*"
 tf2_msgs = "*"
 serde = {version = "1.0", features = ["derive"]}
 serde_yaml = "*"
+# tf2_rs = "*"
+tf2_rs = {path = "../../tf2_rs"}
 
 # This specific version is compatible with Rust 1.75
 backtrace = "=0.3.74"
