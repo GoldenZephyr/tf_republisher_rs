@@ -41,10 +41,8 @@ fn main() -> Result<(), Error> {
     let f = std::fs::File::open(&*config_path.get())?;
     let remap_config: RemapConfig = serde_yaml::from_reader(f)?;
 
-    let boxed_config = Box::leak(Box::new(remap_config));
-
     let reshape_fn = move || {
-        boxed_config.remaps.iter().for_each(|remap| {
+        remap_config.remaps.iter().for_each(|remap| {
             match buffer.lookup_transform(
                 remap.old_parent.as_str(),
                 remap.old_child.as_str(),
