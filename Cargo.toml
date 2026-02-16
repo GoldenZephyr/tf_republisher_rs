@@ -22,8 +22,7 @@ std_msgs = "*"
 tf2_msgs = "*"
 serde = {version = "1.0", features = ["derive"]}
 serde_yaml = "*"
-# tf2_rs = "*"
-tf2_rs = {path = "../../tf2_rs"}
+tf2_rs = {path = "../tf2_rs"}
 
 # This specific version is compatible with Rust 1.75
 backtrace = "=0.3.74"
